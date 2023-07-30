@@ -1,5 +1,6 @@
 images.src/*.dia
 images.src/*.jpg
+images.src/*.odg
 images.src/*.png
 
 images/
