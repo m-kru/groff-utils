@@ -2,6 +2,7 @@ IMAGES := $(addprefix ../images/, \
 	$(patsubst %.dia,%.pdf,$(wildcard *.dia)) \
 	$(patsubst %.jpg,%.pdf,$(wildcard *.jpg)) \
 	$(patsubst %.odg,%.pdf,$(wildcard *.odg)) \
+	$(patsubst %.png,%.pdf,$(wildcard *.pdf)) \
 	$(patsubst %.png,%.pdf,$(wildcard *.png)) \
 )
 
@@ -18,6 +19,9 @@ all: $(IMAGES)
 
 ../images/%.pdf: %.odg | .images-dir
 	lodraw --headless --convert-to pdf --outdir ../images $<
+
+../images/%.pdf: %.pdf | .images-dir
+	cp $< $@
 
 ../images/%.pdf: %.png | .images-dir
 	convert $< $@
