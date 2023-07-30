@@ -2,17 +2,18 @@ IMAGES := \
 	$(patsubst %.dia,%.pdf,$(wildcard *.dia)) \
 	$(patsubst %.jpg,%.pdf,$(wildcard *.jpg)) \
 	$(patsubst %.png,%.pdf,$(wildcard *.png))
+IMAGES := $(addprefix ../images/,$(IMAGES))
 
 all: $(IMAGES)
 
 .images-dir:
 	@mkdir -p ../images
 
-%.pdf: %.dia | .images-dir
-	dia --nosplash -e ../images/$@ -t pdf $<
+../images/%.pdf: %.dia | .images-dir
+	dia --nosplash -e $@ -t pdf $<
 
-%.pdf: %.jpg | .images-dir
-	convert $< ../images/$@
+../images/%.pdf: %.jpg | .images-dir
+	convert $< $@
 
-%.pdf: %.png | .images-dir
-	convert $< ../images/$@
+../images/%.pdf: %.png | .images-dir
+	convert $< $@
